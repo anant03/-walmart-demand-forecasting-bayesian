@@ -1,109 +1,97 @@
-# Walmart Demand Forecasting with Bayesian Hyperparameter Optimisation
-
-## Overview
-
-This project applies machine learning to forecast daily retail demand using the Walmart M5 dataset (single-store subset: CA_1).
-
-We compare grid search and Bayesian optimisation for tuning a LightGBM regression model and evaluate performance using time-aware validation.
-
-The objective is to improve demand forecast accuracy to support better inventory planning and replenishment decisions.
+# Bayesian-Optimised Demand Forecasting for Retail Inventory Planning
 
 ---
 
-## Dataset
+## NON-TECHNICAL EXPLANATION OF YOUR PROJECT
 
-M5 Forecasting – Accuracy (Kaggle)
-
-Single-store subset (CA_1) used for computational efficiency while maintaining realistic retail forecasting complexity.
-
-Time period: 2011–2016
-Target variable: Daily unit sales (`sales`)
-
-Features include calendar variables, price information, and engineered lag/rolling statistics.
-
-A time-based split was used:
-
-* Training set: Historical data
-* Validation set: Final 28 days
+Retailers must predict how many units of each product will sell each day to avoid stockouts and excess inventory. Poor forecasts lead to lost sales or unnecessary storage costs. This project builds a machine learning model to predict daily product demand using historical sales data from Walmart. The model uses advanced optimisation techniques to improve forecasting accuracy. By comparing traditional grid search with Bayesian optimisation, the project demonstrates how intelligent hyperparameter tuning can enhance predictive performance and support better inventory planning decisions in retail environments.
 
 ---
 
-## Approach
+## DATA
 
-* Data preparation and reshaping from wide to long format
-* Feature engineering:
+The dataset used in this project is the **M5 Forecasting – Accuracy** dataset from Kaggle, originally released by Walmart.
 
-  * Lag features (7, 14, 28 days)
-  * Rolling mean features
-  * Price change features
-  * Calendar and SNAP indicators
-* Baseline regression model (Linear Regression)
-* Advanced model (LightGBM)
-* Grid search hyperparameter tuning
-* Bayesian hyperparameter optimisation (Optuna)
-* Full retraining using best Bayesian parameters
-* Performance comparison using RMSE, MAE, and SMAPE
+It contains:
 
----
+* Daily unit sales for thousands of products
+* Store-level information
+* Calendar variables
+* Product pricing data
 
-## Results
+For computational efficiency, this project uses a subset corresponding to a single store (CA_1) from 2011–2016.
 
-| Model                 | RMSE   | MAE    |
-| --------------------- | ------ | ------ |
-| Linear Regression     | 2.1219 | 1.0842 |
-| Default LightGBM      | 2.0378 | 1.0458 |
-| Grid Search           | 2.0599 | 1.0501 |
-| Bayesian (Full Train) | 2.0351 | 1.0443 |
-
-Key findings:
-
-* Gradient boosting significantly outperforms linear regression.
-* Grid search did not improve generalisation performance.
-* Bayesian optimisation achieved the best validation RMSE.
-* Default LightGBM parameters were already strong for tabular retail forecasting.
+The dataset is publicly available through Kaggle and is subject to Kaggle’s competition terms of use.
 
 ---
 
-## Evaluation Metrics
+## MODEL
+
+The model used is **LightGBM (Light Gradient Boosting Machine)**, a tree-based ensemble learning algorithm.
+
+LightGBM was chosen because:
+
+* It performs well on structured tabular data
+* It captures non-linear relationships
+* It handles large datasets efficiently
+* It is widely used in retail forecasting applications
+
+The model predicts daily unit sales for each product using historical demand patterns, price information, and calendar features.
+
+---
+
+## HYPERPARAMETER OPTIMISATION
+
+Several hyperparameters influence LightGBM performance, including:
+
+* Learning rate
+* Number of leaves
+* Maximum tree depth
+* Number of estimators
+* Subsampling parameters
+
+Two optimisation approaches were compared:
+
+1. **Grid Search** – Exhaustive evaluation over a predefined parameter grid
+2. **Bayesian Optimisation (Optuna)** – Adaptive search using probabilistic modelling
+
+Bayesian optimisation was used to efficiently explore the hyperparameter space and identify configurations that minimise validation RMSE.
+
+The final model was retrained on the full training dataset using the best Bayesian parameters.
+
+---
+
+## RESULTS
+
+Model performance was evaluated using a time-aware validation split (last 28 days held out).
+
+Evaluation metrics:
 
 * RMSE (Root Mean Squared Error)
 * MAE (Mean Absolute Error)
 * SMAPE (Symmetric Mean Absolute Percentage Error)
 
-Time-aware validation ensured no data leakage across training and evaluation periods.
+| Model                 | RMSE       |
+| --------------------- | ---------- |
+| Linear Regression     | 2.1219     |
+| Default LightGBM      | 2.0378     |
+| Grid Search           | 2.0599     |
+| Bayesian (Full Train) | **2.0351** |
+
+Key insights:
+
+* Gradient boosting significantly outperforms linear regression.
+* Grid search did not improve generalisation performance.
+* Bayesian optimisation achieved the best validation accuracy.
+* Default LightGBM parameters were already strong for this dataset.
+
+Even modest improvements in forecast accuracy can translate into meaningful cost savings in real-world retail inventory systems.
 
 ---
 
-## Repository Structure
+## (OPTIONAL: CONTACT DETAILS)
 
-* `data/` – raw and processed datasets
-* `notebooks/` – step-by-step modelling workflow
-* `models/` – saved hyperparameters
-* `model_card.md` – model documentation
-* `dataset_card.md` – dataset documentation
-* `README.md` – project overview
+For questions or collaboration inquiries:
 
----
-
-## Business Relevance
-
-Improved demand forecasts enable:
-
-* Reduced stockouts
-* Lower inventory holding costs
-* More accurate replenishment decisions
-* Better working capital allocation
-
-Even small improvements in RMSE can have meaningful financial impact at retail scale.
-
----
-
-## Status
-
-Completed coursework project demonstrating:
-
-* End-to-end machine learning pipeline
-* Hyperparameter tuning
-* Bayesian optimisation
-* Time-aware validation
-* Model and dataset documentation
+GitHub: [https://github.com/anant03](https://github.com/anant03)
+Email: [anant.nigam@gmail.com](mailto:anant.nigam@gmail.com)
