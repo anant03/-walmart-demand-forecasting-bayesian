@@ -89,7 +89,7 @@ Even modest improvements in forecast accuracy can translate into meaningful cost
 
 ---
 
-## (OPTIONAL: CONTACT DETAILS)
+## (CONTACT DETAILS)
 
 For questions or collaboration inquiries:
 
