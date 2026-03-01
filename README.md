@@ -2,11 +2,9 @@
 
 ---
 
-## NON-TECHNICAL EXPLANATION OF YOUR PROJECT
+## NON-TECHNICAL EXPLANATION OF THE PROJECT
 
 Retailers must predict how many units of each product will sell each day to avoid stockouts and excess inventory. Poor forecasts lead to lost sales or unnecessary storage costs. This project builds a machine learning model to predict daily product demand using historical sales data from Walmart. The model uses advanced optimisation techniques to improve forecasting accuracy. By comparing traditional grid search with Bayesian optimisation, the project demonstrates how intelligent hyperparameter tuning can enhance predictive performance and support better inventory planning decisions in retail environments.
-
----
 
 ## DATA
 
@@ -23,7 +21,6 @@ For computational efficiency, this project uses a subset corresponding to a sing
 
 The dataset is publicly available through Kaggle and is subject to Kaggle’s competition terms of use.
 
----
 
 ## MODEL
 
@@ -37,8 +34,6 @@ LightGBM was chosen because:
 * It is widely used in retail forecasting applications
 
 The model predicts daily unit sales for each product using historical demand patterns, price information, and calendar features.
-
----
 
 ## HYPERPARAMETER OPTIMISATION
 
@@ -58,8 +53,6 @@ Two optimisation approaches were compared:
 Bayesian optimisation was used to efficiently explore the hyperparameter space and identify configurations that minimise validation RMSE.
 
 The final model was retrained on the full training dataset using the best Bayesian parameters.
-
----
 
 ## RESULTS
 
@@ -86,8 +79,6 @@ Key insights:
 * Default LightGBM parameters were already strong for this dataset.
 
 Even modest improvements in forecast accuracy can translate into meaningful cost savings in real-world retail inventory systems.
-
----
 
 ## (CONTACT DETAILS)
 
